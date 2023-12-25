@@ -5,3 +5,8 @@ export const PASSWORD = '123456';
 
 
 export const blackColor = "#000000";
+
+
+
+
+

@@ -41,7 +41,11 @@
     width: 50%;
   } */
 
-  
+   body{
+    background-color: #03e9f4;
+   }
+
+
 .login-box {
     position: absolute;
     top: 50%;
