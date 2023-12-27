@@ -32,7 +32,6 @@ const Login = () => {
       console.log("hi there");
       // console.log("userId", userId);
       // console.log("password", password);
-
       const response = await fetch(`${apiUrl}?${queryParams}`, {
         method: "POST",
         // mode: 'no-cors', // Not recommended for production
@@ -53,8 +52,9 @@ const Login = () => {
       //     'Content-Type': 'application/json',
       //   },
       // });
-
+         
       if (result.EmpId) {
+       localStorage.setItem("userData", JSON.stringify(result));
         console.log("Login successful!", result.data);
         navigate("/home");
         setIsLoggedIn((prevUserDetails) => ({
