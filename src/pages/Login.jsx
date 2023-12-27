@@ -1,105 +1,87 @@
 import React, { useState } from "react";
 import "../styless/Login.css";
-import { Link } from "react-router-dom";
-// import { useLogin } from "./../Context/LoginProvider";
-// import { useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL, PASSWORD, USERNAME } from "./../../varible";
 import base64 from "base-64";
 import axios from "axios";
+import { useLogin } from "../Context/LoginProvider";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const { isLoggedIn, setIsLoggedIn } = useLogin();
+
+  const navigate = useNavigate(); // Hook for navigation
+
   // console.log("userId", userId);
   // console.log("password", password);
 
   //error handleing
   const [error, setError] = useState(null);
-  //useContext api
-  // const { isLoggedIn, setIsLoggedIn } = useLogin();
-  // const history = useHistory();
-  //loading
   const [isLoading, setIsLoading] = useState(false);
 
-  // const handleLogin = async () => {
-  //   try {
+  const handleLogin = async () => {
+    try {
+      const credentials = `${USERNAME}:${PASSWORD}`;
+      const base64Credentials = btoa(credentials);
+      // const authHeader ="Basic"+base64.encode(USERNAME + ":" + PASSWORD);
+      const apiUrl = "api/HomeApi/Login";
+      const queryParams = `networkId=${userId}&password=${password}`;
+      console.log("hi there");
+      // console.log("userId", userId);
+      // console.log("password", password);
 
-  //     const authHeader = "Basic" + base64.encode(USERNAME + ":" + PASSWORD);
-  //     const response = await fetch(`${BASE_URL}/api/HomeApi/Login?networkId=${userId}&password=${password}`,{
-  //         method: "POST",
-  //         mode: 'no-cors',
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "Access-Control-Allow-Origin": "*",
-  //           Authorization: authHeader,
-  //         },
+      const response = await fetch(`${apiUrl}?${queryParams}`, {
+        method: "POST",
+        // mode: 'no-cors', // Not recommended for production
+        credentials: "include",
+        headers: {
+          Authorization: `Basic ${base64Credentials}`,
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      });
 
-  //       },
+      const result = await response.json();
 
-  //     );
+      console.log("apiUrl", apiUrl);
+      // const response = await axios.post(`${apiUrl}?${queryParams}`, null, {
+      //   headers: {
+      //     Authorization: `Basic ${base64Credentials}`,
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
 
-  //     const result = await response.json();
-  //     console.log("rst", result);
-  //   } catch (error) {
-  //     console.error("Login Error:", error);
-  //   } 
-  // };
-
-const handleLogin = async () => {
-// e.preventDefault()
-try {
-  const credentials = `${USERNAME}:${PASSWORD}`;
-  const base64Credentials = btoa(credentials);
-  // const authHeader ="Basic"+base64.encode(USERNAME + ":" + PASSWORD);
-  const apiUrl = 'api/HomeApi/Login';
-  const queryParams = `networkId=${userId}&password=${password}`;
-  console.log("hi there");
-  // console.log("userId", userId);
-  // console.log("password", password);
-
-  const response = await fetch(`${apiUrl}?${queryParams}`, {
-    method: 'POST',
-    // mode: 'no-cors', // Not recommended for production
-    credentials: 'include',
-    headers: {
-      Authorization: `Basic ${base64Credentials}`,
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-    },
-  });
-
-  console.log("apiUrl",apiUrl)
-  // const response = await axios.post(`${apiUrl}?${queryParams}`, null, {
-  //   headers: {
-  //     Authorization: `Basic ${base64Credentials}`,
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
-
-
-  if (response.status === 200) {
-    console.log('Login successful!', response.data);
-    // Perform any additional actions after successful login
-  } else {
-    console.error('Login failed. Please check your credentials.');
-    // Handle unsuccessful login (show error message, etc.)
-  }
-} catch (error) {
-  console.error('An error occurred during login:', error.message);
-  // Handle other errors (network issues, server errors, etc.)
-}
-};
+      if (result.EmpId) {
+        console.log("Login successful!", result.data);
+        navigate("/home");
+        setIsLoggedIn((prevUserDetails) => ({
+          ...prevUserDetails,
+          login: true,
+          userDetails: result,
+        }));
+      } else {
+        alert("Username and Password did not match");
+        console.error("Login failed. Please check your credentials.");
+        // Handle unsuccessful login
+        setError(errorMessage);
+      }
+    } catch (error) {
+      console.error("Login error:", error.message);
+    }
+  };
 
   return (
+
     <div style={{}}>
       <h1 style={{ color: "blue", textAlign: "center" }}>Welcome to OMS</h1>
-      {/* <h1 className='check'>check </h1> */}
-      <div class="login-box">
+      {/* <h1 classNameName='check'>check </h1> */}
+      <div className="login-box">
         <h2>Login</h2>
         <form>
-          <div class="user-box">
+          <div className="user-box">
             <input
               type="text"
               name="userId"
@@ -108,7 +90,7 @@ try {
             />
             <label>Username</label>
           </div>
-          <div class="user-box">
+          <div className="user-box">
             <input
               type="password"
               name="password"
@@ -120,7 +102,7 @@ try {
           {/* <a >Login</a> */}
         </form>
         <br />
-        <button onClick={handleLogin} type="button" class="btn btn-info">
+        <button onClick={handleLogin} type="button" className="btn btn-info">
           Login
         </button>
         <p>
@@ -130,9 +112,24 @@ try {
             <Link to="/register">Register</Link>
           </span>
         </p>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>
   );
 };
 
 export default Login;
+
+// if (response.EmpId) {
+//   setIsLoggedIn((prevUserDetails) => ({
+//     ...prevUserDetails,
+//     login: true,
+//     userDetails: response,
+//   }));
+
+// } else {
+//   const errorMessage = response;
+//   setError(errorMessage);
+//   console.log("errorMessage", errorMessage);
+// }

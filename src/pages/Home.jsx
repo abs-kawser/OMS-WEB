@@ -1,32 +1,16 @@
-import React from 'react';
+import React from "react";
+import { useLogin } from "../Context/LoginProvider";
 
 const Home = () => {
+  const { isLoggedIn, setIsLoggedIn } = useLogin();
+  const { userDetails } = isLoggedIn;
+  console.log("isLoggedIn", isLoggedIn);
+  console.log("userDetails",userDetails);
+
   return (
     <div className="container-fluid">
+      <h1>Full-Name:{userDetails?.FullName}</h1>
       <div className="row">
-        {/* Bootstrap Sidebar */}
-        <nav id="sidebar" className="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-          <div className="position-sticky">
-            <ul className="nav flex-column">
-              <li className="nav-item">
-                <a className="nav-link active" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link 1
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link 2
-                </a>
-              </li>
-              {/* Add more sidebar items as needed */}
-            </ul>
-          </div>
-        </nav>
 
         {/* Main Content */}
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

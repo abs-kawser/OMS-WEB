@@ -9,8 +9,8 @@ import {
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import LoginProvider from "./Context/LoginProvider";
 import Product from './pages/product';
+import LoginProvider from "./Context/LoginProvider";
 
 const App = () => {
 
