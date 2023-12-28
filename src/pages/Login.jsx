@@ -16,7 +16,7 @@ const Login = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   // console.log("userId", userId);
-  // console.log("password", password);
+  console.log("password", password);
 
   //error handleing
   const [error, setError] = useState(null);
