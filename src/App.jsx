@@ -11,7 +11,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Product from './pages/product';
 import LoginProvider from "./Context/LoginProvider";
-import CreateOrder from "./pages/createOrder";
+import CreateOrder from "./pages/CreateOrder";
 
 const App = () => {
 
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/product" element={<Product />} />
-          <Route path="/createOrder" element={<CreateOrder />} />
+          <Route path="/createOrder" element={<CreateOrder/>} />
 
 
         </Routes>
