@@ -7,11 +7,14 @@ import axios from "axios";
 import { useLogin } from "../Context/LoginProvider";
 
 const Login = () => {
+
+
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const { isLoggedIn, setIsLoggedIn } = useLogin();
+  console.log({ isLoggedIn })
 
   const navigate = useNavigate(); // Hook for navigation
 
@@ -22,9 +25,14 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+
   const handleLogin = async () => {
     try {
       const credentials = `${USERNAME}:${PASSWORD}`;
+
+
+      //http://103.209.40.121:6565http://103.209.40.121:6565
+      
       const base64Credentials = btoa(credentials);
       // const authHeader ="Basic"+base64.encode(USERNAME + ":" + PASSWORD);
       const apiUrl = "api/HomeApi/Login";
@@ -32,19 +40,20 @@ const Login = () => {
       console.log("hi there");
       // console.log("userId", userId);
       // console.log("password", password);
+        
       const response = await fetch(`${apiUrl}?${queryParams}`, {
         method: "POST",
-        // mode: 'no-cors', // Not recommended for production
         credentials: "include",
         headers: {
           Authorization: `Basic ${base64Credentials}`,
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
+
+        // mode: 'no-cors',
+
       });
-
       const result = await response.json();
-
       console.log("apiUrl", apiUrl);
       // const response = await axios.post(`${apiUrl}?${queryParams}`, null, {
       //   headers: {
@@ -52,16 +61,17 @@ const Login = () => {
       //     'Content-Type': 'application/json',
       //   },
       // });
-         
-      if (result.EmpId) {
-       localStorage.setItem("userData", JSON.stringify(result));
+
+      if (result?.EmpId) {
+        localStorage.setItem("userData", JSON.stringify(result));
         console.log("Login successful!", result.data);
-        navigate("/home");
         setIsLoggedIn((prevUserDetails) => ({
           ...prevUserDetails,
           login: true,
           userDetails: result,
+          
         }));
+        navigate("/home");
       } else {
         alert("Username and Password did not match");
         console.error("Login failed. Please check your credentials.");

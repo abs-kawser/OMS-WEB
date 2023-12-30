@@ -8,8 +8,26 @@ export default defineConfig({
       "/api":"http://103.209.40.121:6565"
     }
   },
+
+
   plugins: [react()],
+
+  // server: {
+	// 	host: true,
+	// 	port: 3001,
+	// 	proxy: {
+	// 		'/api': {
+	// 			target: 'http://103.209.40.121:6565',
+	// 			changeOrigin: true,
+	// 			rewrite: (path) => path.replace(/^\/api/, '/api'),
+	// 		},
+	// 	},
+	// },
 })
+
+
+
+
 
 
 

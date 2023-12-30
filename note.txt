@@ -1,0 +1,7 @@
+1: after reload data not gone 
+2: date picker 
+3: take all data from create order and send to orderDetails page 
+4: order details page design 
+5: order details page call submit api 
+6: it have any other page --> 
+

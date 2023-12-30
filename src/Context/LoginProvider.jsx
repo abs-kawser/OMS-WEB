@@ -6,7 +6,8 @@ const LoginProvider = ({ children }) => {
   
   const [isLoggedIn, setIsLoggedIn] = useState({
     logIn: false,
-    userDetails: null,
+    userDetails: JSON.parse(window.localStorage.getItem("userData")) || " ",
+    // userDetails:null
   });
 
   return (
@@ -17,5 +18,6 @@ const LoginProvider = ({ children }) => {
 };
 
 export  const useLogin = () => useContext(LoginContext);
-
 export default LoginProvider;
+
+
