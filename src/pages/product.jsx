@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL, PASSWORD, USERNAME, blackColor } from "./../../varible";
+import base64 from "base-64";
 import { useLogin } from "../Context/LoginProvider";
 
 const Product = () => {
@@ -11,43 +12,70 @@ const Product = () => {
   const { userDetails } = isLoggedIn;
   console.log("isLoggedIn",isLoggedIn);
 
+  // const fetchProductDatax = async () => {
+  //   try {
+  //     const credentials = `${USERNAME}:${PASSWORD}`;
+  //     const base64Credentials = btoa(credentials);
+  //     const apiUrl = "api/ProductApi/GetAllProduct";
+
+  //     const response = await fetch(`${apiUrl}`, {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Authorization: `Basic ${base64Credentials}`,
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     console.log("response", response);
+
+  //     if (response.ok) {
+  //       const responseData = await response.json(); // Parse JSON data
+  //       console.log("Product fetch successfully!", responseData);
+
+  //       setProductData(responseData); // Update productData state
+  //       setIsLoading(false); // Update isLoading state
+
+  //     } else {
+  //       console.error("Product not fetch successfully");
+  //       // Handle unsuccessful fetch (show error message, etc.)
+  //     }
+  //   } catch (error) {
+  //     console.error("An error occurred during fetch-Product:", error.message);
+  //   }
+  // };
+
+
+
   const fetchProductDatax = async () => {
     try {
-      const credentials = `${USERNAME}:${PASSWORD}`;
-      const base64Credentials = btoa(credentials);
-      const apiUrl = "api/ProductApi/GetAllProduct";
-
-      const response = await fetch(`${apiUrl}`, {
+      const authHeader = "Basic " + base64.encode(USERNAME + ":" + PASSWORD);
+      const response = await fetch(`${BASE_URL}/api/ProductApi/GetAllProduct`, {
         method: "GET",
-        credentials: "include",
         headers: {
-          Authorization: `Basic ${base64Credentials}`,
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
+          Authorization: authHeader,
         },
       });
-
-      console.log("response", response);
-
-      if (response.ok) {
-        const responseData = await response.json(); // Parse JSON data
-        console.log("Product fetch successfully!", responseData);
-
-        setProductData(responseData); // Update productData state
-        setIsLoading(false); // Update isLoading state
-
-      } else {
-        console.error("Product not fetch successfully");
-        // Handle unsuccessful fetch (show error message, etc.)
-      }
+      const result = await response.json();
+      // console.log("jsonData",typeof(result));
+      console.log({result});
+      setProductData(result)
+      setIsLoading(false);
+      // return jsonData;
     } catch (error) {
-      console.error("An error occurred during fetch-Product:", error.message);
+      console.error("Error fetching data:", error);
+      
     }
-  };
+  }
 
   useEffect(() => {
     fetchProductDatax();
   }, []);
+
+
+  console.log("data paise",productData);
 
   return (
     <div>
@@ -69,9 +97,9 @@ const Product = () => {
           </tr>
         </thead>
         <tbody>
-          {productData.map((product) => (
+          {productData?.map((product) => (
             <tr key={product.id}>
-              <td style={{ padding: '10px' }}>{product.ProductFamilyName}</td>
+              <td style={{ padding: '10px' }}>{product?.ProductFamilyName}</td>
               <td style={{ padding: '10px' }}>{product.ProductId}</td>
               <td style={{ padding: '10px' }}>{product.ProductCode}</td>
               <td style={{ padding: '10px' }}>{product.PackSize}</td>

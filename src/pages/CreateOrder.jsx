@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLogin } from "../Context/LoginProvider";
+import base64 from "base-64";
+import { USERNAME, PASSWORD, BASE_URL } from "./../../varible";
 
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -10,7 +12,6 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { USERNAME, PASSWORD } from "./../../varible";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -76,35 +77,56 @@ const CreateOrder = () => {
   };
 
  
+  // const fetchCustomerData = async () => {
+  //   try {
+  //     const credentials = `${USERNAME}:${PASSWORD}`;
+  //     const base64Credentials = btoa(credentials);
+  //     const apiUrl = "api/CustomerApi/GetAllCustomer";
+  //     const queryParams = `territoryId=${userDetails?.TerritoryId}`;
+  //     // const queryParams = `territoryId=${user?.TerritoryId}`;
+  //     console.log("queryParams", { queryParams });
+
+  //     // const queryParams = 'territoryId=46';
+  //     const response = await fetch(`${apiUrl}?${queryParams}`, {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Authorization: `Basic ${base64Credentials}`,
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     console.log("response", response);
+  //     const result = await response.json();
+  //     // console.log("result", result);
+  //     setCustomerData(result);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
   const fetchCustomerData = async () => {
     try {
-      const credentials = `${USERNAME}:${PASSWORD}`;
-      const base64Credentials = btoa(credentials);
-      const apiUrl = "api/CustomerApi/GetAllCustomer";
-      const queryParams = `territoryId=${userDetails?.TerritoryId}`;
-      // const queryParams = `territoryId=${user?.TerritoryId}`;
-      console.log("queryParams", { queryParams });
-
-      // const queryParams = 'territoryId=46';
-      const response = await fetch(`${apiUrl}?${queryParams}`, {
-        method: "GET",
-        credentials: "include",
+      const authHeader = "Basic " + base64.encode(USERNAME + ":" + PASSWORD);
+      const apiUrl = `${BASE_URL}/api/CustomerApi/GetAllCustomer?territoryId=${userDetails?.TerritoryId}`;
+      console.log("API URL:", apiUrl);
+      const response = await fetch(apiUrl, {
         headers: {
-          Authorization: `Basic ${base64Credentials}`,
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
+          Authorization: authHeader,
         },
       });
-      console.log("response", response);
+
       const result = await response.json();
-      // console.log("result", result);
+      console.log(JSON.stringify("fetch json data  ", result, null, 2));
       setCustomerData(result);
+      return jsonData;
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching data:", error);
+      
     }
   };
 
-  // console.log("user.TerritoryId", user.TerritoryId);
   useEffect(() => {
     fetchCustomerData();
   }, []);
