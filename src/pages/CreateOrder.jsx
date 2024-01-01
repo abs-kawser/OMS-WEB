@@ -9,45 +9,39 @@ import Button from "@mui/material/Button";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { USERNAME, PASSWORD } from './../../varible';
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { USERNAME, PASSWORD } from "./../../varible";
 
-
-
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { getData } from "../utils/utils";
 
+import DatePicker from "react-datepicker";
 
-
-
-
+import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendar } from 'react-icons/fa';
 
 const CreateOrder = () => {
   // const user = localStorage.getItem("userData");
   // console.log({ user });
 
-  // const userData = JSON.parse(user); 
+  // const userData = JSON.parse(user);
 
   // const territoryId = userData.TerritoryId;
   // console.log(territoryId);
 
-
-
   const theme = useTheme();
 
-  const [customerData, setCustomerData] = useState([]);
+  const [customerData, setCustomerData] = useState();
   const [selectedData, setSelectedData] = useState([]);
-  const [orderDate, setOrderDate] = useState();
-  const [deliveryDate, setDeliveryDate] = useState();
+  const [orderDate, setOrderDate] = useState(null);
+  const [deliveryDate, setDeliveryDate] = useState(null);
   const [note, setNote] = useState("");
 
-
-  console.log({customerData});
-  
+  // console.log({ customerData });
   // console.log({ selectedData });
   // console.log({ note });
   // console.log({ orderDate });
@@ -55,13 +49,18 @@ const CreateOrder = () => {
 
   // const data = getData();
   // console.log( "Data paise ",data.TerritoryId);
+  //console.log("userDetails", { userDetails });
 
+
+  console.log("orderDate",orderDate);
+  console.log("deliveryDate",deliveryDate);
+  console.log({ note });
+ 
 
   //comeing from contex
   const { isLoggedIn, setIsLoggedIn } = useLogin();
   const { userDetails } = isLoggedIn;
-  console.log('userDetails', { userDetails });
-
+ 
 
   function getStyles(name, customerData, theme) {
     return {
@@ -72,22 +71,11 @@ const CreateOrder = () => {
     };
   }
 
-
-
-
-
   const handleChange = (event) => {
     setSelectedData(event.target.value);
   };
 
-
-  const handleOrderDateChange = (newDate) => {
-    setOrderDate(newDate);
-    // Additional logic if needed
-  };
-
-
-
+ 
   const fetchCustomerData = async () => {
     try {
       const credentials = `${USERNAME}:${PASSWORD}`;
@@ -109,7 +97,7 @@ const CreateOrder = () => {
       });
       console.log("response", response);
       const result = await response.json();
-      console.log("result", result);
+      // console.log("result", result);
       setCustomerData(result);
     } catch (error) {
       console.log(error);
@@ -118,8 +106,7 @@ const CreateOrder = () => {
 
   // console.log("user.TerritoryId", user.TerritoryId);
   useEffect(() => {
-   
-    fetchCustomerData()
+    fetchCustomerData();
   }, []);
 
   return (
@@ -155,26 +142,27 @@ const CreateOrder = () => {
               </Select>
             </FormControl>
           </Box>
-
         </div>
-
+        <br />
         <div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
-              <DatePicker label="Order Date "
-               value={orderDate}
-                onChange={handleOrderDateChange}
-                format="DD/MM/YY"
-              />
-            </DemoContainer>
-          </LocalizationProvider>
+        
 
+          <DatePicker
+            selected={orderDate}
+            onChange={(date) => setOrderDate(date)}
+            dateFormat="dd/MM/yyyy"           
+            placeholderText="Select Order Date"
+
+          />
           <br />
-          <LocalizationProvider dateAdapter={AdapterDayjs} >
-            <DemoContainer components={["DatePicker"]}>
-              <DatePicker label="Delivery Date" />
-            </DemoContainer>
-          </LocalizationProvider>
+          <br />
+          <DatePicker
+            selected={deliveryDate}
+            onChange={(date) => setDeliveryDate(date)}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select Delivery Date"
+            // showIcon
+          />
         </div>
         <br />
 

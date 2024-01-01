@@ -46,7 +46,7 @@ const Login = () => {
         credentials: "include",
         headers: {
           Authorization: `Basic ${base64Credentials}`,
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "(*)",
           "Content-Type": "application/json",
         },
 
