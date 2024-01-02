@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Product from './pages/product';
 import CreateOrder from './pages/CreateOrder';
 import { useLogin } from "./Context/LoginProvider";
+import Customer from './pages/Customer';
 
 const App = () => {
 
@@ -20,7 +21,7 @@ const App = () => {
 
   const { isLoggedIn, setIsLoggedIn } = useLogin();
   const { userDetails } = isLoggedIn;
-  console.log("userDetails",userDetails);
+  // console.log("userDetails",userDetails);
 
   // useEffect(() => {
   //   if (user) {
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/product" element={<Product />} />
         <Route path="/createOrder" element={<CreateOrder/>} />
+        <Route path="/customer"   element={<Customer/>}/>
       </Routes>
     </Router>
   );

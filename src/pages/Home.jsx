@@ -2,14 +2,15 @@ import React from "react";
 import { useLogin } from "../Context/LoginProvider";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
+import Customer from "./Customer";
 
 const Home = () => {
   const navigate = useNavigate();
 
   const { isLoggedIn, setIsLoggedIn } = useLogin();
   const { userDetails } = isLoggedIn;
-  console.log("isLoggedIn", isLoggedIn);
-  console.log("userDetails", userDetails);
+  // console.log("isLoggedIn", isLoggedIn);
+  // console.log("userDetails", userDetails);
 
   const handleCreateOrderClick = () => {
     navigate("/createOrder");
@@ -17,6 +18,10 @@ const Home = () => {
 
   const handleProduct = () => {
     navigate("/product");
+  };
+
+  const Customer = () => {
+    navigate("/customer");
   };
 
   return (
@@ -35,13 +40,23 @@ const Home = () => {
         </main>
       </div>
 
-      <div  style={{display:"flex",gap:5,alignItems:"center",justifyContent:"center"}}>
+      <div
+        style={{
+          display: "flex",
+          gap: 5,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         {" "}
         <Button variant="contained" onClick={handleCreateOrderClick}>
           Create order
         </Button>
         <Button variant="contained" onClick={handleProduct}>
           Product List{" "}
+        </Button>
+        <Button variant="contained" onClick={Customer}>
+          Customer List{" "}
         </Button>
       </div>
     </div>

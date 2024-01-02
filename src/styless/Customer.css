@@ -1,0 +1,30 @@
+.customer-page-container {
+    margin-left: 20px;
+  }
+  
+  .table-header {
+    background: #008080;
+    color: #fff;
+  }
+  
+  .table-cell {
+    padding: 10px;
+    text-align: left;
+  }
+
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+
+
+
+
+
+
+
+tr:hover {
+    background-color: #f9c74f;
+  }

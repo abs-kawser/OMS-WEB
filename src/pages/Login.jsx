@@ -16,7 +16,8 @@ const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useLogin();
   // console.log({ isLoggedIn })
 
-  const navigate = useNavigate(); // Hook for navigation
+  // Hook for navigation
+  const navigate = useNavigate(); 
 
   // console.log("userId", userId);
   // console.log("password", password);
@@ -165,7 +166,6 @@ const Login = () => {
             <Link to="/register">Register</Link>
           </span>
         </p>
-
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>

@@ -120,7 +120,7 @@ const CreateOrder = () => {
       const result = await response.json();
       console.log(JSON.stringify("fetch json data  ", result, null, 2));
       setCustomerData(result);
-      return jsonData;
+      // return jsonData;
     } catch (error) {
       console.error("Error fetching data:", error);
       

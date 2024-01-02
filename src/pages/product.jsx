@@ -12,40 +12,6 @@ const Product = () => {
   const { userDetails } = isLoggedIn;
   console.log("isLoggedIn",isLoggedIn);
 
-  // const fetchProductDatax = async () => {
-  //   try {
-  //     const credentials = `${USERNAME}:${PASSWORD}`;
-  //     const base64Credentials = btoa(credentials);
-  //     const apiUrl = "api/ProductApi/GetAllProduct";
-
-  //     const response = await fetch(`${apiUrl}`, {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         Authorization: `Basic ${base64Credentials}`,
-  //         "Access-Control-Allow-Origin": "*",
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     console.log("response", response);
-
-  //     if (response.ok) {
-  //       const responseData = await response.json(); // Parse JSON data
-  //       console.log("Product fetch successfully!", responseData);
-
-  //       setProductData(responseData); // Update productData state
-  //       setIsLoading(false); // Update isLoading state
-
-  //     } else {
-  //       console.error("Product not fetch successfully");
-  //       // Handle unsuccessful fetch (show error message, etc.)
-  //     }
-  //   } catch (error) {
-  //     console.error("An error occurred during fetch-Product:", error.message);
-  //   }
-  // };
-
 
 
   const fetchProductDatax = async () => {
