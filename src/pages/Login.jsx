@@ -14,12 +14,12 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { isLoggedIn, setIsLoggedIn } = useLogin();
-  console.log({ isLoggedIn })
+  // console.log({ isLoggedIn })
 
   const navigate = useNavigate(); // Hook for navigation
 
   // console.log("userId", userId);
-  console.log("password", password);
+  // console.log("password", password);
 
   //error handleing
   const [error, setError] = useState(null);

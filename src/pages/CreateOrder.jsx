@@ -167,8 +167,6 @@ const CreateOrder = () => {
         </div>
         <br />
         <div>
-        
-
           <DatePicker
             selected={orderDate}
             onChange={(date) => setOrderDate(date)}
@@ -187,7 +185,6 @@ const CreateOrder = () => {
           />
         </div>
         <br />
-
         <div className="form-group" style={{ alignSelf: "center" }}>
           <label htmlFor="formGroupExampleInput">Note</label>
           <input

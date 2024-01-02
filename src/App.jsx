@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Product from './pages/product';
-import CreateOrder from "./pages/createOrder";
+import CreateOrder from './pages/CreateOrder';
 import { useLogin } from "./Context/LoginProvider";
 
 const App = () => {
@@ -46,7 +46,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/createOrder" element={<CreateOrder />} />
+        <Route path="/createOrder" element={<CreateOrder/>} />
       </Routes>
     </Router>
   );
