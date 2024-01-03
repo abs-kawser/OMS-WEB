@@ -55,7 +55,7 @@ const Product = () => {
       <table style={{ width: '60%', borderCollapse: 'collapse', }}>
         <thead>
           <tr style={{ background: '#008080', color: '#fff' }}>
-            <th style={{ padding: '10px', textAlign: 'left' }}>Product Name</th>
+            <th style={{ padding: '10px', textAlign: 'left' }}>Brand Name</th>
             <th style={{ padding: '10px', textAlign: 'left' }}>Product Id</th>
             <th style={{ padding: '10px', textAlign: 'left' }}>Product Code</th>
             <th style={{ padding: '10px', textAlign: 'left' }}>Pack Size</th>

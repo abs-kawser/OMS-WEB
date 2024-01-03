@@ -13,6 +13,7 @@ import Product from './pages/product';
 import CreateOrder from './pages/CreateOrder';
 import { useLogin } from "./Context/LoginProvider";
 import Customer from './pages/Customer';
+import OrderDetails from './pages/OrderDetails';
 
 const App = () => {
 
@@ -49,6 +50,8 @@ const App = () => {
         <Route path="/product" element={<Product />} />
         <Route path="/createOrder" element={<CreateOrder/>} />
         <Route path="/customer"   element={<Customer/>}/>
+        <Route path="/orderDetails"   element={<OrderDetails/>}/>
+
       </Routes>
     </Router>
   );

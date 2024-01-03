@@ -5,6 +5,7 @@ import { BASE_URL, PASSWORD, USERNAME, blackColor } from "./../../varible";
 import "../styless/Customer.css";
 
 const Customer = () => {
+  
   const [customerData, setCustomerData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,46 +45,37 @@ const Customer = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-  <div >
-    <h1 style={{ color: blackColor,}}>Customer Page</h1>
-    <table style={{ width: "60%", borderCollapse: "collapse",textAlign:"center"}}>
-      <thead>
-        {/* <tr style={{ background: "#008080", color: "#fff" }}>
-          <th style={{ padding: "10px", textAlign: "left" }}>
-          Customer Name
-          </th>
-          <th style={{ padding: "10px", textAlign: "left" }}>
-          Customer Id
-          </th>
-          <th style={{ padding: "10px", textAlign: "left" }}>
-          Depot Name
-          </th>
-          <th style={{ padding: "10px", textAlign: "left" }}>
-          Customer-Address
-          </th>
-          {/* <th style={{ padding: "10px", textAlign: "left" }}>MRP</th> */}
-        {/* </tr>  */}
-        <tr className="table-header">
-          <th className="table-cell">Customer Name</th>
-          <th className="table-cell">Customer Id</th>
-          <th className="table-cell">Depot Name</th>
-          <th className="table-cell">Customer-Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        {customerData?.map((item) => (
-          <tr key={item.id}>
-            <td style={{ padding: "10px" }}>{item?.Name}</td>
-            <td style={{ padding: "10px" }}>{item?.CustomerId}</td>
-            <td style={{ padding: "10px" }}>{item?.DepotName}</td>
-            <td style={{ padding: "10px" }}>{item?.Address}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
-</div>
+        <div>
+          <h1 style={{ color: blackColor }}>Customer Page</h1>
+          <table
+            style={{
+              width: "60%",
+              borderCollapse: "collapse",
+              textAlign: "center",
+            }}
+          >
+            <thead>
+              <tr className="table-header">
+                <th className="table-cell">Customer Name</th>
+                <th className="table-cell">Customer Id</th>
+                <th className="table-cell">Depot Name</th>
+                <th className="table-cell">Customer-Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customerData?.map((item) => (
+                <tr key={item.id}>
+                  <td style={{ padding: "10px" }}>{item?.Name}</td>
+                  <td style={{ padding: "10px" }}>{item?.CustomerId}</td>
+                  <td style={{ padding: "10px" }}>{item?.DepotName}</td>
+                  <td style={{ padding: "10px" }}>{item?.Address}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
   );
 };
 
