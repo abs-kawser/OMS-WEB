@@ -4,14 +4,10 @@ import base64 from "base-64";
 import { USERNAME, PASSWORD, BASE_URL } from "./../../varible";
 
 import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
 
 import Button from "@mui/material/Button";
 
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -28,9 +24,7 @@ import { FaCalendar } from "react-icons/fa";
 const CreateOrder = () => {
   // const user = localStorage.getItem("userData");
   // console.log({ user });
-
   // const userData = JSON.parse(user);
-
   // const territoryId = userData.TerritoryId;
   // console.log(territoryId);
 
@@ -73,33 +67,7 @@ const CreateOrder = () => {
     setSelectedData(event.target.value);
   };
 
-  // const fetchCustomerData = async () => {
-  //   try {
-  //     const credentials = `${USERNAME}:${PASSWORD}`;
-  //     const base64Credentials = btoa(credentials);
-  //     const apiUrl = "api/CustomerApi/GetAllCustomer";
-  //     const queryParams = `territoryId=${userDetails?.TerritoryId}`;
-  //     // const queryParams = `territoryId=${user?.TerritoryId}`;
-  //     console.log("queryParams", { queryParams });
-
-  //     // const queryParams = 'territoryId=46';
-  //     const response = await fetch(`${apiUrl}?${queryParams}`, {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         Authorization: `Basic ${base64Credentials}`,
-  //         "Access-Control-Allow-Origin": "*",
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     console.log("response", response);
-  //     const result = await response.json();
-  //     // console.log("result", result);
-  //     setCustomerData(result);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  
 
   const fetchCustomerData = async () => {
     try {
@@ -200,7 +168,7 @@ const CreateOrder = () => {
             onChange={(event) => {
               setNote(event.target.value);
             }}
-            style={{ backgroundColor: '#b2dfdb' }}
+            style={{ backgroundColor: "#b2dfdb" }}
           />
         </div>
         <br />
@@ -211,3 +179,34 @@ const CreateOrder = () => {
 };
 
 export default CreateOrder;
+
+
+
+
+// const fetchCustomerData = async () => {
+  //   try {
+  //     const credentials = `${USERNAME}:${PASSWORD}`;
+  //     const base64Credentials = btoa(credentials);
+  //     const apiUrl = "api/CustomerApi/GetAllCustomer";
+  //     const queryParams = `territoryId=${userDetails?.TerritoryId}`;
+  //     // const queryParams = `territoryId=${user?.TerritoryId}`;
+  //     console.log("queryParams", { queryParams });
+
+  //     // const queryParams = 'territoryId=46';
+  //     const response = await fetch(`${apiUrl}?${queryParams}`, {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Authorization: `Basic ${base64Credentials}`,
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     console.log("response", response);
+  //     const result = await response.json();
+  //     // console.log("result", result);
+  //     setCustomerData(result);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };

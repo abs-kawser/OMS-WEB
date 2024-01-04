@@ -3,6 +3,7 @@ import { useLogin } from "../Context/LoginProvider";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Customer from "./Customer";
+import Header from "../Component/Header";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,11 +26,13 @@ const Home = () => {
   };
 
   return (
-    <div className="container-fluid">
+    
+    <div>
       <div className="row">
+        <Header />
+
         {/* Main Content */}
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          {/* Your main content goes here */}
           <h1>Home Page</h1>
           <h2>User Details</h2>
 
@@ -48,15 +51,14 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        {" "}
         <Button variant="contained" onClick={handleCreateOrderClick}>
           Create order
         </Button>
         <Button variant="contained" onClick={handleProduct}>
-          Product List{" "}
+          Product List
         </Button>
         <Button variant="contained" onClick={Customer}>
-          Customer List{" "}
+          Customer List
         </Button>
       </div>
     </div>

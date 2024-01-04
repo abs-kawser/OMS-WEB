@@ -1,12 +1,15 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const OrderDetails = () => {
+
+ 
+  const [showProductData, setShowProductData] = useState(true);
+  const [showOrderData, setShowOrderData] = useState(false);
+
   return (
     <div>
-      <h3 style={{ textAlign:"center"}}>
-        Order Details
-      </h3>
+      <h3 style={{ textAlign: "center" }}>Order Details</h3>
 
       <div
         style={{
@@ -19,7 +22,7 @@ const OrderDetails = () => {
         <Button variant="contained">Product List</Button>
         <Button variant="contained">Order Details</Button>
       </div>
-       
+
       <> </>
 
       <> </>
